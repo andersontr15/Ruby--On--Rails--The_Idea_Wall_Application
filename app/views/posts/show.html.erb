@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+	div.ideas{
+			border: 2px solid black;
+			width:250px;
+			height:50px;
+		}
+	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+<a href="/posts">Bright Ideas</a>
+<% if current_user %>
+  <form action='/sessions' method='post'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='_method' value='delete'>
+    <input type='submit' value='Log Out'>
+  </form>
+<% end %>
+<hr>
+<%= @post.user.name %> says : <div class="ideas"><%= @post.idea %></div>
+
+People who liked this post:
+
+<table class="table class table-bordered table-striped table-hovered table-hover">
+	<thead>
+		<tr>
+			<th>Alias</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+	<% @likes.each do |l|%>
+			<tr>
+				<td><%= l.user.name%></td>
+				<td><a href="/users/<%=l.user.id%>"><%= l.user.alias%></a></td>
+			</tr>
+	<% end %>
+	</tbody>
+</table>
+</div>
+</body>
+</html>

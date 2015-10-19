@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<% if current_user %>
+  <form action='/sessions' method='post'>
+    <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+    <input type='hidden' name='_method' value='delete'>
+    <input type='submit' value='Log Out'>
+  </form>
+<% end %>
+<a href="/posts">Bright Ideas</a>
+<hr>
+Name: <%= @user.name %>
+<br>
+Alias: <%= @user.alias %>
+<br>
+Email: <%=@user.email %>
+<hr>
+Total Number of Posts : <%= @user.ideas.count %>
+<br>
+Total Number of Likes : <%= @user.likes.count %>
+
+</div>
+</body>
+</html>
